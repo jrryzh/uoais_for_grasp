@@ -115,6 +115,7 @@ class AmodalVisibleEvaluator(DatasetEvaluator):
             outputs: the outputs of a COCO model. It is a list of dicts with key
                 "instances" that contains :class:`Instances`.
         """
+        import ipdb; ipdb.set_trace()
         for input, output in zip(inputs, outputs):
             amodal_prediction = {"image_id": input["image_id"]}
             visible_prediction = {"image_id": input["image_id"]}

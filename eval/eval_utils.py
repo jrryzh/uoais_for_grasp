@@ -300,6 +300,7 @@ def eval_amodal_occ_on_OSD(args):
         visibles = instances.pred_visible_masks.detach().cpu().numpy()        
         
         # count occluded area of predictions when classified
+        import ipdb; ipdb.set_trace()
         all_occ_pred, all_bou_pred = 0, 0
         num_inst_occ_prd_img = 0
         for pred in preds:

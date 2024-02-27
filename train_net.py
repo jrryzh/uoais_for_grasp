@@ -289,9 +289,14 @@ def main(args):
 if __name__ == "__main__":
     parser = default_argument_parser()
     parser.add_argument("--gpu", type=str, default="0", help="gpu id")
+    parser.add_argument("--eval_only", type=bool, default=True, help="eval or train")
     args = parser.parse_args()
     
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
+    # 修改：临时按照4卡设置
+    # os.environ['CUDA_VISIBLE_DEVICES'] = "0,1,2,3"
+    # args.num_gpus = 4
+    
     print("Command Line Args:", args)
     launch(
         main,

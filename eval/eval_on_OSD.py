@@ -4,7 +4,6 @@ import os
 
 from eval.eval_utils import eval_visible_on_OSD, eval_amodal_occ_on_OSD
 
-
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser('UOIS CenterMask', add_help=False)
