@@ -40,5 +40,5 @@ if __name__ == "__main__":
         eval_visible_on_OSD(args)
     else:
         eval_amodal_occ_on_OSD(args)
-        eval_visible_on_OSD(args)
+        # eval_visible_on_OSD(args)
     

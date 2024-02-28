@@ -1,7 +1,8 @@
 VERSION: 2
 MODEL:
   META_ARCHITECTURE: "GeneralizedRCNN"
-  WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  # WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  WEIGHTS: "/home/zhangjinyu/code_repository/uoais/output/R50_rgbdconcat_mlc_occatmask_hom_concat/model_final.pth"
   BACKBONE:
     NAME: "build_resnet_rgbd_latefusion_fpn_backbone"
   RGBD_FUSION: "late"

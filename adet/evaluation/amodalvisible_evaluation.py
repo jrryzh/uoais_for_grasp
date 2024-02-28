@@ -115,7 +115,6 @@ class AmodalVisibleEvaluator(DatasetEvaluator):
             outputs: the outputs of a COCO model. It is a list of dicts with key
                 "instances" that contains :class:`Instances`.
         """
-        import ipdb; ipdb.set_trace()
         for input, output in zip(inputs, outputs):
             amodal_prediction = {"image_id": input["image_id"]}
             visible_prediction = {"image_id": input["image_id"]}
@@ -131,6 +130,11 @@ class AmodalVisibleEvaluator(DatasetEvaluator):
                 visible_prediction["proposals"] = output["proposals"].to(self._cpu_device)
                 occlusion_prediction["proposals"] = output["proposals"].to(self._cpu_device)
 
+            # import ipdb; ipdb.set_trace()
+            # 修改： 只添加每个gt vm 的iou最大的vm到结果
+            # input['annotations'][0].keys() -> dict_keys(['iscrowd', 'bbox', 'category_id', 'segmentation', 'visible_mask', 'occluded_mask', 'occluded_rate', 'bbox_mode'])
+            
+            
             self._amodal_predictions.append(amodal_prediction)
             self._visible_predictions.append(visible_prediction)
             self._occlusion_predictions.append(occlusion_prediction)
