@@ -362,6 +362,7 @@ def multilabel_amodal_metrics(prediction, gt, obj_detect_threshold=0.75, return_
                 'obj_detected_075_percentage' : 1.,
                 }, []
 
+    import ipdb; ipdb.set_trace()
     # For every pair of GT label vs. predicted label, calculate stuff
     for i, gt_i in enumerate(labels_gt):
 

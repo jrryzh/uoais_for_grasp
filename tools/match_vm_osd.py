@@ -9,7 +9,7 @@ import itertools
 import numpy as np
 from pycocotools import mask as maskUtils
 
-def compute_iou_rle(mask1, mask2):
+def compute_iou(mask1, mask2):
     intersection = np.logical_and(mask1, mask2).sum()
     union = np.logical_or(mask1, mask2).sum()
 
@@ -29,11 +29,8 @@ if __name__ == "__main__":
     pred_anno_list = torch.load("/home/zhangjinyu/code_repository/uoais/output/R50_rgbdconcat_mlc_occatmask_hom_concat/inference/osd_visible_instances.pth")
     
     for j, gt_anno_path in enumerate(amodal_anno_paths):
-        max_iou = 0 
-        max_i = None
-        max_pred_vm = None
         
-        anno_file = amodal_anno_paths[j]
+        anno_file = gt_anno_path
         amodal_anno = cv2.imread(anno_file)[...,0]
         img_name = anno_file.split('/')[-1].split('_')[0] + '.png'
         anno_id = int(anno_file.split('/')[-1].split('_')[1].strip('.png'))
@@ -46,21 +43,24 @@ if __name__ == "__main__":
         pred_instance = pred_anno_list[index]
         visibles = pred_instance.pred_visible_masks.detach().cpu().numpy() 
         
+        max_iou = 0 
+        max_i = None
+        max_pred_vm = None
         for i in range(visibles.shape[0]):
             pred_vm = visibles[i]
-            iou = compute_iou_rle(gt_vm, pred_vm)
+            iou = compute_iou(gt_vm, pred_vm)
             if iou > max_iou:
                 max_iou = iou
                 max_i = i
                 max_pred_vm = pred_vm
                 
         best_vm_matches.append(max_pred_vm)
-        print(f"finished processing image {j}")
+        print(f"finished processing image {j}, iou is {max_iou}")
     
-    filename = '/home/zhangjinyu/code_repository/uoais/output/best_vm_matches_uoais.pkl'
-    # 假设 best_vm_matches 是你想要保存的对象
-    with open(filename, 'wb') as f:
-        pickle.dump(best_vm_matches, f)
+    # filename = '/home/zhangjinyu/code_repository/uoais/output/best_vm_matches_uoais.pkl'
+    # # 假设 best_vm_matches 是你想要保存的对象
+    # with open(filename, 'wb') as f:
+    #     pickle.dump(best_vm_matches, f)
             
             
             

@@ -60,7 +60,6 @@ class DatasetMapperWithBasis(DatasetMapper):
 
     def __init__(self, cfg, is_train=True):
         super().__init__(cfg, is_train)
-
         # Rebuild augmentations
         logger.info(
             "Rebuilding the augmentations. The previous augmentations will be overridden."
@@ -117,7 +116,6 @@ class DatasetMapperWithBasis(DatasetMapper):
             )
         self.augmentation_lists = T.AugmentationList(self.augmentation_lists)
 
-
     def __call__(self, dataset_dict):
         """
         Args:
@@ -125,7 +123,7 @@ class DatasetMapperWithBasis(DatasetMapper):
 
         Returns:
             dict: a format that builtin models in detectron2 accept
-        """
+        """        
         dataset_dict = copy.deepcopy(dataset_dict)  # it will be modified by code below
         image = utils.read_image(
             dataset_dict["file_name"], format=self.image_format
